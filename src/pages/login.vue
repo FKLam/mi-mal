@@ -61,7 +61,19 @@ export default {
         console.log(res)
         this.$cookie.set('userId', res.id, {expires: '1M'})
         this.$store.dispatch('saveUserName', res.username)
-        this.$router.push('/index')
+        // this.$router.push('/index')
+        // this.$router.push({
+        //   path: '/index',
+        //   query: {
+        //     from: 'login'
+        //   }
+        // })
+        this.$router.push({
+          name: 'index',
+          params: {
+            from: 'login'
+          }
+        })
       }).catch((err) => {
         console.log(err)
       })

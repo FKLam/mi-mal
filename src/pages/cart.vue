@@ -96,13 +96,13 @@ export default{
       let selected = item.productSelected
       if (type === '-') {
         if (quantity === 1) {
-          alert('商品至少保留一件')
+          this.$message.warning('商品至少保留一件')
           return
         }
         --quantity
       } else if (type === '+') {
         if (quantity >= item.productStock) {
-          alert('商品不能超过库存数量')
+          this.$message.warning('商品不能超过库存数量')
           return
         }
         ++quantity
@@ -121,6 +121,7 @@ export default{
       this.axios.delete(`/carts/${item.productId}`).then((res) => {
         console.log(res)
         this.renderData(res)
+        this.$message.success('删除成功')
       })
     },
     order () {
@@ -128,7 +129,7 @@ export default{
         return !item.productSelected
       })
       if (isCheck) {
-        alert('请选择一件商品')
+        this.$message.warning('请选择一件商品')
       } else {
         this.$router.push('/order/confirm')
       }
